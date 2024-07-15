@@ -1,7 +1,9 @@
 const express = require('express');
 const connectToDB = require('./database/connectDatabase');
-const testRoutes = require('./routes/testRoutes');
 const cors = require("cors")
+
+const testRoutes = require('./routes/testRoutes');
+const taskRoutes = require('./routes/taskRoutes')
 
 app = express();
 
@@ -12,6 +14,7 @@ connectToDB();
 
 // Test route
 app.use('/test', testRoutes)
+app.use('/create', taskRoutes)
 
 
 // Listen
