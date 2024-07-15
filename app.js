@@ -14,7 +14,7 @@ connectToDB();
 
 // Test route
 app.use('/test', testRoutes)
-app.use('/create', taskRoutes)
+app.use('/tasks', taskRoutes)
 
 
 // Listen
