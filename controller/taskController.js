@@ -3,9 +3,10 @@ const Task = require("../models/taskMode")
 const createTask = async (req, res) =>{
     const {title, description, priority} = req.body;
     console.log(req.body)
-    await Task.create({title, description, priority, isComplete : false})
+    const data = await Task.create({title, description, priority, isComplete : false})
     return res.status(200).json({
-        message: "Done"
+        message: "Done",
+        data
     })
 }
 
@@ -22,4 +23,25 @@ const deleteTask = async (req, res) => {
     })
 }
 
-module.exports = {createTask, getTasks, deleteTask}
+const setComplete = async (req, res) => {
+    const {id, completed} = req.body;
+    // console.log(id, completed)
+    await Task.findByIdAndUpdate(id, {
+        isComplete : completed
+    })
+    return res.status(200).json({
+        message: "Done"
+    })
+}
+
+const updateTask = async (req, res) => {
+    const {id, title, priority, description, isComplete} = req.body;
+    const data = await Task.findByIdAndUpdate(id, {
+        title, priority, description
+    })
+    return res.status(200).json({
+        message: "Succesful", data
+    })
+}
+
+module.exports = {createTask, getTasks, deleteTask, setComplete, updateTask}
