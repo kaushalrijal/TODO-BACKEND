@@ -22,19 +22,22 @@ const login = async (req, res) => {
     })
     if(!data){
         return res.status(401).json({
-            message : "Credentials don't match."
+            message : "Credentials don't match.",
+            success: false
         })
     }
     const match = bcrypt.compareSync(password, data.password);
     if(!match){
         return res.status(401).json({
-            message : "Wrong Password"
+            message : "Wrong Password",
+            success: false
         })
     }
     const token = jwt.sign({userId: data._id}, "meowmeow", {expiresIn : '30d'})
     res.cookie("token", token, {httponly:true})
     return res.status(200).json({
-        message: "Login Successful"
+        message: "Login Successful",
+        success: true
     })
 }
 
