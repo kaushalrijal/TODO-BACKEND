@@ -14,6 +14,10 @@ const taskSchema = new Schema({
     },
     isComplete : {
         type : Boolean
+    },
+    user : {
+        type : Schema.Types.ObjectId,
+        ref: "User"
     }
 })
 

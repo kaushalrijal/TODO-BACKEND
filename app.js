@@ -4,6 +4,7 @@ const cors = require("cors")
 
 const testRoutes = require('./routes/testRoutes');
 const taskRoutes = require('./routes/taskRoutes')
+const authRoutes = require("./routes/userRoutes")
 
 app = express();
 
@@ -15,6 +16,7 @@ connectToDB();
 // Test route
 app.use('/test', testRoutes)
 app.use('/tasks', taskRoutes)
+app.use('/user', authRoutes)
 
 
 // Listen
