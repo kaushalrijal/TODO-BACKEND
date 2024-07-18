@@ -15,7 +15,7 @@ const taskSchema = new Schema({
     isComplete : {
         type : Boolean
     },
-    user : {
+    author : {
         type : Schema.Types.ObjectId,
         ref: "User"
     }

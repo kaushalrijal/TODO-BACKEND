@@ -2,8 +2,9 @@ const Task = require("../models/taskModel")
 
 const createTask = async (req, res) =>{
     const {title, description, priority} = req.body;
-    console.log(req.body)
-    const data = await Task.create({title, description, priority, isComplete : false})
+    const id = req.userId
+    console.log(id)
+    const data = await Task.create({title, description, priority, isComplete : false, author: id})
     return res.status(200).json({
         message: "Done",
         data
@@ -13,6 +14,11 @@ const createTask = async (req, res) =>{
 const getTasks = async (req, res) => {
     const tasks = await Task.find();
     return res.status(200).json(tasks);
+}
+
+const testTasks = async (req, res) => {
+    const id = req.userId
+    return res.status(200).json({id});
 }
 
 const deleteTask = async (req, res) => {
@@ -44,4 +50,4 @@ const updateTask = async (req, res) => {
     })
 }
 
-module.exports = {createTask, getTasks, deleteTask, setComplete, updateTask}
+module.exports = {createTask, getTasks, testTasks, deleteTask, setComplete, updateTask}

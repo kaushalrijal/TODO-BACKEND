@@ -17,9 +17,7 @@ const isAuthenticated = (req, res, next) => {
                 message: "Invalid Token"
             })
         }
-        console.log(result)
         const data = await User.findById(result.userId);
-        console.log(data)
         if(!data){
             return res.status(400).json({
                 success: false,
