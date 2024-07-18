@@ -11,7 +11,7 @@ const isAuthenticated = (req, res, next) => {
         })
     }
 
-    jwt.verify(token, "meowmeow", async(error, result) => {
+    jwt.verify(token, process.env.SECRET, async(error, result) => {
         if(error){
             console.log("Error jwt verify")
             return res.status(400).send({
