@@ -3,7 +3,6 @@ const Task = require("../models/taskModel")
 const createTask = async (req, res) =>{
     const {title, description, priority} = req.body;
     const id = req.userId
-    console.log(id)
     const data = await Task.create({title, description, priority, isComplete : false, author: id})
     return res.status(200).json({
         message: "Done",
@@ -18,7 +17,10 @@ const getTasks = async (req, res) => {
 
 const testTasks = async (req, res) => {
     const id = req.userId
-    return res.status(200).json({id});
+    const tasks = await Task.find({
+        author: id
+    })
+    return res.status(200).json(tasks);
 }
 
 const deleteTask = async (req, res) => {
