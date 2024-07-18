@@ -11,13 +11,15 @@ const isAuthenticated = (req, res, next) => {
     }
 
     jwt.verify(token, "meowmeow", async(error, result) => {
-        if(err){
+        if(error){
             return res.status(400).json({
                 success: false,
                 message: "Invalid Token"
             })
         }
-        const data = await User.findById(result.UserId);
+        console.log(result)
+        const data = await User.findById(result.userId);
+        console.log(data)
         if(!data){
             return res.status(400).json({
                 success: false,
